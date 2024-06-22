@@ -22,7 +22,7 @@ namespace EldenRingFPSUnlockAndMore
 
             00007FF6AEA0EF5F (Version 1.2.0.0)
          */
-        internal const string PATTERN_FRAMELOCK = "C7 ?? ?? 89 88 3C EB"; // first byte can can be 88/90 instead of 89 due to precision loss on floating point numbers
+        internal const string PATTERN_FRAMELOCK = "C7 43 1C 89 88 3C EB"; // first byte can can be 88/90 instead of 89 due to precision loss on floating point numbers
         internal const int PATTERN_FRAMELOCK_OFFSET = 3; // offset to byte array from found position
         internal const string PATTERN_FRAMELOCK_FUZZY = "89 73 ?? C7 ?? ?? ?? ?? ?? ?? EB ?? 89 73";
         internal const int PATTERN_FRAMELOCK_OFFSET_FUZZY = 6;
@@ -39,10 +39,11 @@ namespace EldenRingFPSUnlockAndMore
             
             00007FF7A30CAB27 (Version 1.2.0.0)
          */
+        //"eb .. c7 .. .. 3c 00 00 00 c7 .. .. 01 00 00 00
         internal const string PATTERN_HERTZLOCK = "EB ?? C7 ?? ?? 3C 00 00 00 C7 ?? ?? 01 00 00 00";
-        internal const int PATTERN_HERTZLOCK_OFFSET = 2;
-        internal const int PATTERN_HERTZLOCK_OFFSET_INTEGER1 = 3;
-        internal const int PATTERN_HERTZLOCK_OFFSET_INTEGER2 = 10;
+        internal const int PATTERN_HERTZLOCK_OFFSET = 5;// 2
+        internal const int PATTERN_HERTZLOCK_OFFSET_INTEGER1 = 0; //3
+        internal const int PATTERN_HERTZLOCK_OFFSET_INTEGER2 = 0; // 10
         internal const int PATCH_HERTZLOCK_INSTRUCTION_LENGTH = 14;
 
 
@@ -66,8 +67,8 @@ namespace EldenRingFPSUnlockAndMore
             00007FF7A30C8D80 | 74 39                      | je eldenring.7FF7A30C8DBB                                      |
             00007FF7A30C8D82 | 41:8BD3                    | mov edx,r11d                                                   |
          */
-        internal const string PATTERN_RESOLUTION_SCALING_FIX = "48 C7 45 B8 FE FF FF FF 48 89 58 10 48 89 70 18 48 89 78 20 0F 29 70 C8 48 8B";
-        internal const int PATTERN_RESOLUTION_SCALING_FIX_OFFSET = 148;
+        internal const string PATTERN_RESOLUTION_SCALING_FIX = "74 4F 45 8B 94 CC";
+        internal const int PATTERN_RESOLUTION_SCALING_FIX_OFFSET = 0;
         internal static readonly byte[] PATCH_RESOLUTION_SCALING_FIX_ENABLE = new byte[] { 0xEB };  // jmp
         internal static readonly byte[] PATCH_RESOLUTION_SCALING_FIX_DISABLE = new byte[] { 0x74 }; // je
 
